@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'drawer/app_theme.dart';
 import 'const/colors.dart';
 import 'const/diabetes_doodle_painter.dart';
+import 'chat/chat_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   final String username;
@@ -244,8 +245,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ? Text(
                               _username.isNotEmpty ? _username[0].toUpperCase() : '?',
                               style: const TextStyle(
-                                fontSize: 60, 
-                                fontWeight: FontWeight.bold, 
+                                fontSize: 60,
+                                fontWeight: FontWeight.bold,
                                 color: AppColors.primary
                               ),
                             )
@@ -326,6 +327,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     'Check Logs',
                     Icons.history_rounded,
                     AppColors.accent,
+                    onTap: () {
+                      // Handled by parent or default action
+                    },
                   ),
                   const SizedBox(height: 16),
                   _buildHealthCard(
@@ -333,6 +337,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     '${(widget.stepProgress * 100).toInt()}% Completed',
                     Icons.track_changes_rounded,
                     AppColors.secondary,
+                  ),
+                  const SizedBox(height: 16),
+                  _buildHealthCard(
+                    'Health Assistant',
+                    'Chat for Diabetes Insights',
+                    Icons.chat_bubble_outline_rounded,
+                    AppColors.primary,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const ChatScreen()),
+                      );
+                    },
                   ),
                 ],
               ),
@@ -364,55 +381,59 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  Widget _buildHealthCard(String title, String subtitle, IconData icon, Color color) {
-    return Container(
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: Theme.of(context).cardTheme.color,
-        borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: color.withOpacity(0.2), width: 1.5), // Added border colors
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.03),
-            blurRadius: 20,
-            offset: const Offset(0, 10),
-          )
-        ],
-      ),
-      child: Row(
-        children: [
-          Container(
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: color.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(16),
+  Widget _buildHealthCard(String title, String subtitle, IconData icon, Color color, {VoidCallback? onTap}) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(24),
+      child: Container(
+        padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          color: Theme.of(context).cardTheme.color,
+          borderRadius: BorderRadius.circular(24),
+          border: Border.all(color: color.withOpacity(0.2), width: 1.5),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.03),
+              blurRadius: 20,
+              offset: const Offset(0, 10),
+            )
+          ],
+        ),
+        child: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: color.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: Icon(icon, color: color, size: 28),
             ),
-            child: Icon(icon, color: color, size: 28),
-          ),
-          const SizedBox(width: 16),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
-                    fontSize: 14,
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+                      fontSize: 14,
+                    ),
                   ),
-                ),
-                Text(
-                  subtitle,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
+                  Text(
+                    subtitle,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          Icon(Icons.chevron_right_rounded, color: Colors.grey.withOpacity(0.5)),
-        ],
+            Icon(Icons.chevron_right_rounded, color: Colors.grey.withOpacity(0.5)),
+          ],
+        ),
       ),
     );
   }

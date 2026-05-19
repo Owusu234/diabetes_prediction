@@ -22,6 +22,7 @@ import 'network/offline_screen.dart';
 import 'profile_screen.dart';
 import 'diet/diet_plan_screen.dart';
 import 'health_tips_screen.dart';
+import 'chat/chat_screen.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -133,6 +134,7 @@ class _HomePageState extends State<HomePage> {
               index: _currentIndex,
               children: [
                 _buildHomeBody(),
+                const ChatScreen(),
                 ProfileScreen(
                   username: _username, 
                   image: _image, 
@@ -158,9 +160,9 @@ class _HomePageState extends State<HomePage> {
           pinned: true,
           stretch: true,
           centerTitle: false,
-          automaticallyImplyLeading: true, // Return drawer icon
+          automaticallyImplyLeading: true,
           flexibleSpace: FlexibleSpaceBar(
-            titlePadding: const EdgeInsets.symmetric(horizontal: 56, vertical: 12), // Adjust for drawer icon
+            titlePadding: const EdgeInsets.symmetric(horizontal: 56, vertical: 12),
             title: Text(
               'Hello, $_username',
               style: TextStyle(
@@ -406,7 +408,8 @@ class _HomePageState extends State<HomePage> {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           _buildNavItem(Icons.home_rounded, 'Home', 0),
-          _buildNavItem(Icons.person_rounded, 'Profile', 1),
+          _buildNavItem(Icons.forum_rounded, 'Assistant', 1),
+          _buildNavItem(Icons.person_rounded, 'Profile', 2),
         ],
       ),
     );

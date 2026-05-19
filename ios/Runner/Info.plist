@@ -66,5 +66,26 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>This app needs access to location when open to help track your activities and clinics.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>This app needs access to location when open and in the background to track your progress.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>This app needs access to location when in the background.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>This app needs camera access to take photos for your profile or records.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app needs photos access to select images from your gallery.</string>
+	<key>NSMotionUsageDescription</key>
+	<string>This app needs access to motion data to track your steps using the pedometer.</string>
+
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>sms</string>
+		<string>tel</string>
+		<string>https</string>
+		<string>http</string>
+	</array>
 </dict>
 </plist>
